@@ -6,7 +6,6 @@ public class Square {
     public boolean isProtectedWhite;
     public boolean isProtectedBlack;
 
-
     public Square(int x, int y) {
         this.isOccupied = false;
         this.x = x;
@@ -28,6 +27,14 @@ public class Square {
     public void leave() {
         isOccupied = false;
         occupiedBy = null;
+    }
+
+    public String toString() {
+        if (this.isOccupied) {
+            return " " + occupiedBy.toString() + " ";
+        } else {
+            return " _ ";
+        }
     }
 
 }

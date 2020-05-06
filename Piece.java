@@ -1,21 +1,17 @@
-public class Piece {
+// Consider making this an abstract class.
+
+public interface Piece {
 
     // Every Piece will need an isProtected boolean so that the king won't be annoying
 
-    public boolean color;
-    public int x, y;
-    private Square[] legalMoves;
+    public Piece();
 
-    public Piece(boolean color, int x, int y) {
-        this.color = color;
-        this.x = x;
-        this.y = y;
-    }
+    public Piece(boolean color, int x, int y);
 
-    public Square[] getLegalMoves() {
-        return legalMoves;
-    }
+    public Square[] getLegalMoves();
 
-    public void calculateLegalMoves() {}
+    public void calculateLegalMoves();
+
+    public String toString();
 
 }

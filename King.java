@@ -1,4 +1,4 @@
-public class King extends Piece {
+public class King implements Piece {
 
     public King(boolean color, int x, int y) {
         super(color, x, y);
