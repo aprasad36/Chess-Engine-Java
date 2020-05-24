@@ -26,8 +26,7 @@ public class Rook implements Piece {
 
     // This doesn't work
     public int move(Board b, Square s) {
-        if s.squareInArray(this.influence(b)) {
-            if
+        if (s.squareInArray(this.influence(b))) {
             return 0;
         }
         return 1;
