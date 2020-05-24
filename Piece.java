@@ -6,10 +6,13 @@ public interface Piece {
 
     public Square[] getLegalMoves(Board b);
 
+    public boolean getColor();
     // public void calculateLegalMoves();
 
     public Square[] influence(Board b);
 
     public String toString();
+
+    public int move(Board b, Square s);
 
 }

@@ -12,41 +12,83 @@ public class Rook implements Piece {
     }
 
     public String toString() {
-        return "R";
+        if (color) {
+            return "Rw";
+        } else {
+            return "Rb";
+        }
     }
 
-    // This is a work in progress. This still doesnt account for captures
+    public boolean getColor() {
+        return color;
+    }
+
+
+    // This doesn't work
+    public int move(Board b, Square s) {
+        if s.squareInArray(this.influence(b)) {
+            if
+            return 0;
+        }
+        return 1;
+    }
+
+    // Returns the influence of the rook. This doesn't always give legal moves because the rook might be pinned to the king.
     public Square[] influence(Board b) {
         Square[] returnSquares = new Square[14];
-        boolean upCont = true;
-        boolean downCont = true;
-        boolean rightCont = true;
-        boolean leftCont = true;
+        boolean up = true;
+        boolean down = true;
+        boolean right = true;
+        boolean left = true;
         int count = 0;
         for (int i = 1; i < 8; i++) {
-            if (this.y + i < 8 && rightCont && !b.boardList[this.x][this.y+i].isOccupied) {
-                returnSquares[count] = b.boardList[this.x][this.y+i];
-                count++;
-            } else {
-                rightCont = false;
+            if (y + i < 8 && right) {
+                if (!b.boardList[x][y+i].isOccupied) {
+                    returnSquares[count] = b.boardList[x][y+i];
+                    count++;
+                } else {
+                    if (color != b.boardList[x][y+i].occupiedBy.getColor()) {
+                        returnSquares[count] = b.boardList[x][y+i];
+                        count++;
+                    }
+                    right = false;
+                }
             }
-            if (this.y - i >= 0 && leftCont && !b.boardList[this.x][this.y-i].isOccupied) {
-                returnSquares[count] = b.boardList[this.x][this.y-i];
-                count++;
-            } else {
-                leftCont = false;
+            if (y - i >= 0 && left) {
+                if (!b.boardList[x][y-i].isOccupied) {
+                    returnSquares[count] = b.boardList[x][y-i];
+                    count++;
+                } else {
+                    if (color != b.boardList[x][y-i].occupiedBy.getColor()) {
+                        returnSquares[count] = b.boardList[x][y-i];
+                        count++;
+                    }
+                    left = false;
+                }
             }
-            if (this.x - i >= 0 && upCont && !b.boardList[this.x - i][this.y].isOccupied) {
-                returnSquares[count] = b.boardList[this.x - i][this.y];
-                count++;
-            } else {
-                upCont = false;
+            if (x - i >= 0 && up) {
+                if (!b.boardList[x-i][y].isOccupied) {
+                    returnSquares[count] = b.boardList[x-i][y];
+                    count++;
+                } else {
+                    if (color != b.boardList[x-i][y].occupiedBy.getColor()) {
+                        returnSquares[count] = b.boardList[x-i][y];
+                        count++;
+                    }
+                    up = false;
+                }
             }
-            if (this.x + i < 8 && downCont && !b.boardList[this.x + i][this.y].isOccupied) {
-                returnSquares[count] = b.boardList[this.x + i][this.y];
-                count++;
-            } else {
-                downCont = false;
+            if (x + i < 8 && down) {
+                if (!b.boardList[x+i][y].isOccupied) {
+                    returnSquares[count] = b.boardList[x+i][y];
+                    count++;
+                } else {
+                    if (color != b.boardList[x+i][y].occupiedBy.getColor()) {
+                        returnSquares[count] = b.boardList[x+i][y];
+                        count++;
+                    }
+                    down = false;
+                }
             }
         }
         return returnSquares;
